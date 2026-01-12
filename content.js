@@ -68,126 +68,80 @@ const studyData = {
             ]
         }
     ],
-    "Mathematics": [// Inside studyData["Mathematics"]
-[
-    {
-        id: "math_1",
-        title: "Number System",
-        content: `
-            <p>The Number System is the foundation of Mathematics. It involves the study of different types of numbers and their properties. Key classifications include Natural Numbers, Whole Numbers, Integers, Rational, and Irrational numbers. In competitive exams, topics like <b>Divisibility Rules</b>, <b>Unit Digit Calculation</b>, and <b>Remainder Theorem</b> are frequently asked.</p>
-            
-            <div class="formula-box">
-                <h4><i class="fas fa-square-root-alt"></i> Key Formulas:</h4>
-                <ul>
-                    <li>Sum of first 'n' natural numbers = n(n+1)/2</li>
-                    <li>Sum of squares of first 'n' natural numbers = n(n+1)(2n+1)/6</li>
-                    <li>Dividend = (Divisor × Quotient) + Remainder</li>
-                </ul>
-            </div>
-            
-            <p>Understanding the placement of digits (Face Value vs Place Value) is essential for solving complex simplification problems quickly.</p>
-        `,
-        summary: [
-            "Real numbers include both Rational and Irrational numbers.",
-            "Prime numbers have exactly two factors (1 and itself).",
-            "0 is neither positive nor negative.",
-            "The only even prime number is 2."
-        ],
-        mcqs: [
-            { q: "What is the sum of the first 20 natural numbers?", a: "210", options: ["200", "210", "220", "190"] }
-        ]
-    },
-    {
-        id: "math_2",
-        title: "Percentage",
-        content: `
-            <p>Percentage is a way of expressing a number as a fraction of 100. It is widely used in Data Interpretation and Profit & Loss. To convert a fraction into a percentage, multiply by 100. To convert a percentage into a fraction, divide by 100.</p>
-            
-            
+    "Mathematics":[ 
+        {
+            id: "math_1",
+            title: "Number System",
+            content: `
+                <p>The Number System is the foundation of Mathematics. For competitive exams, focus on <b>Divisibility Rules</b>, <b>Unit Digit Calculation</b>, and <b>Remainder Theorem</b>.</p>
+                
+                <div class="formula-box">
+                    <h4><i class="fas fa-square-root-alt"></i> Key Formulas:</h4>
+                    <ul>
+                        <li>Sum of first 'n' natural numbers = n(n+1)/2</li>
+                        <li>Dividend = (Divisor × Quotient) + Remainder</li>
+                    </ul>
+                </div>
+                <p>Understanding prime numbers and composite numbers is essential for simplifying complex equations.</p>
+            `,
+            summary: [
+                "2 is the only even prime number.",
+                "Rational numbers can be written as p/q.",
+                "Divisibility by 3: Sum of digits must be divisible by 3."
+            ],
+            mcqs: [
+                { q: "What is the unit digit of 23^4?", a: "1", options: ["3", "9", "7", "1"] }
+            ]
+        },
+        {
+            id: "math_2",
+            title: "Percentage",
+            content: `
+                <p>Percentage means 'per every hundred'. It is the most important topic for Data Interpretation (DI) in Banking and SSC exams.</p>
+                
+                
 
-            <div class="formula-box">
-                <h4><i class="fas fa-percentage"></i> Basic Concept:</h4>
-                <p>Percentage Increase = (Increase / Original Value) × 100</p>
-                <p>Percentage Decrease = (Decrease / Original Value) × 100</p>
-            </div>
-        `,
-        summary: [
-            "Fraction 1/2 = 50%, 1/4 = 25%, 1/8 = 12.5%.",
-            "If A is x% more than B, then B is [x/(100+x)]*100% less than A.",
-            "Successive percentage change: (a + b + ab/100)%."
-        ],
-        mcqs: [
-            { q: "What is 20% of 25% of 400?", a: "20", options: ["10", "20", "40", "50"] }
-        ]
-    },
-    {
-        id: "math_3",
-        title: "Profit and Loss",
-        content: `
-            <p>Profit and Loss deals with the price of a product in the market. <b>Cost Price (CP)</b> is the price at which an item is purchased, and <b>Selling Price (SP)</b> is the price at which it is sold. If SP > CP, it is a Profit; if CP > SP, it is a Loss.</p>
-            
-            <div class="formula-box">
-                <h4><i class="fas fa-tags"></i> Essential Formulas:</h4>
-                <ul>
-                    <li>Profit % = (Profit/CP) × 100</li>
-                    <li>Loss % = (Loss/CP) × 100</li>
-                    <li>Selling Price = [(100 + Profit%)/100] × CP</li>
-                </ul>
-            </div>
-        `,
-        summary: [
-            "Profit or Loss is always calculated on the Cost Price (CP).",
-            "Discount is always calculated on the Marked Price (MP).",
-            "SP = Marked Price - Discount."
-        ],
-        mcqs: [
-            { q: "A man buys an item for ₹500 and sells it for ₹600. What is his profit percentage?", a: "20%", options: ["10%", "15%", "20%", "25%"] }
-        ]
-    },
-    {
-        id: "math_4",
-        title: "Simple & Compound Interest",
-        content: `
-            <p>Interest is the cost of borrowing money. <b>Simple Interest (SI)</b> is calculated only on the principal amount, while <b>Compound Interest (CI)</b> is calculated on the principal plus the accumulated interest of previous periods (Interest on Interest).</p>
-            
-            
-
-            <div class="formula-box">
-                <h4><i class="fas fa-chart-line"></i> Formulas:</h4>
-                <p>SI = (P × R × T) / 100</p>
-                <p>CI Amount = P(1 + R/100)^T</p>
-            </div>
-        `,
-        summary: [
-            "Principal (P) is the initial amount.",
-            "In SI, interest remains constant every year.",
-            "CI is always greater than or equal to SI for the same period and rate."
-        ],
-        mcqs: [
-            { q: "Find the SI on ₹1000 at 10% per annum for 2 years.", a: "₹200", options: ["₹100", "₹200", "₹150", "₹250"] }
-        ]
-    },
-    {
-        id: "math_5",
-        title: "Time and Work",
-        content: `
-            <p>Time and Work problems usually deal with finding the efficiency of individuals or groups. The core concept is that <b>Work Done = Time Taken × Efficiency</b>. If a person can do a piece of work in 'n' days, then their one day's work is 1/n.</p>
-            
-            <div class="formula-box">
-                <h4><i class="fas fa-users-cog"></i> Efficiency Rule:</h4>
-                <p>If A can do work in 'x' days and B in 'y' days, together they can do it in (xy) / (x+y) days.</p>
-            </div>
-        `,
-        summary: [
-            "Total Work is often assumed as the LCM of time taken by individuals.",
-            "Efficiency is inversely proportional to time taken.",
-            "Work done by a group (M1D1H1/W1 = M2D2H2/W2)."
-        ],
-        mcqs: [
-            { q: "A can do a work in 10 days, B in 15 days. Together they do it in?", a: "6 days", options: ["5 days", "6 days", "7 days", "8 days"] }
-        ]
-    }
-]],
+                <div class="formula-box">
+                    <h4><i class="fas fa-percentage"></i> Basic Concept:</h4>
+                    <p>Percentage Increase = (Increase / Original Value) × 100</p>
+                    <p>To convert fraction to %, multiply by 100.</p>
+                </div>
+            `,
+            summary: [
+                "1/2 = 50%, 1/3 = 33.33%, 1/4 = 25%.",
+                "Successive % change formula: a + b + (ab/100).",
+                "If A is 20% more than B, B is 16.66% less than A."
+            ],
+            mcqs: [
+                { q: "Convert 3/4 into percentage.", a: "75%", options: ["60%", "75%", "80%", "85%"] }
+            ]
+        },
+        {
+            id: "math_3",
+            title: "Profit and Loss",
+            content: `
+                <p>Profit and Loss is a core arithmetic topic. Profit occurs when the Selling Price (SP) is greater than the Cost Price (CP).</p>
+                
+                <div class="formula-box">
+                    <h4><i class="fas fa-tags"></i> Essential Formulas:</h4>
+                    <ul>
+                        <li>Profit % = (Profit/CP) × 100</li>
+                        <li>SP = [(100 + P%)/100] × CP</li>
+                        <li>Discount is always on Marked Price (MP).</li>
+                    </ul>
+                </div>
+                `,
+            summary: [
+                "Profit/Loss is always calculated on CP unless stated otherwise.",
+                "Discount = MP - SP.",
+                "Effective Discount = d1 + d2 - (d1*d2/100)."
+            ],
+            mcqs: [
+                { q: "CP = 100, SP = 120. Find Profit %.", a: "20%", options: ["10%", "20%", "25%", "30%"] }
+            ]
+        }
+    ],
+      
     "Reasoning": [],
     "English": []
 };
