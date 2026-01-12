@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovStudy Pro | Education Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-university"></i> <span>GovStudy PRO</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" onclick="switchCategory('General Knowledge')"><i class="fas fa-globe-americas"></i> <span>General Knowledge</span></li>
+                <li onclick="switchCategory('Mathematics')"><i class="fas fa-calculator"></i> <span>Mathematics</span></li>
+                <li onclick="switchCategory('Reasoning')"><i class="fas fa-brain"></i> <span>Reasoning</span></li>
+                <li onclick="switchCategory('English')"><i class="fas fa-font"></i> <span>English</span></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="topicSearch" placeholder="Search topics (e.g. Indus Valley)..." onkeyup="handleSearch()">
+                </div>
+                <div class="user-progress">
+                    <span id="overall-progress-text">0% Completed</span>
+                </div>
+            </header>
+
+            <div id="view-container">
+                <section id="dashboard-view">
+                    <h1 id="category-title">General Knowledge</h1>
+                    <div class="progress-container">
+                        <div class="progress-bar"><div id="cat-progress-fill"></div></div>
+                    </div>
+                    <div class="subsection-grid" id="subsection-grid">
+                        </div>
+                </section>
+
+                <section id="study-view" class="hidden">
+                    <button class="btn-back" onclick="showDashboard()"><i class="fas fa-arrow-left"></i> Back to Dashboard</button>
+                    <div id="study-content-area">
+                        </div>
+                    <button id="mark-read-btn" class="btn-primary">Mark as Read & Continue</button>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
