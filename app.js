@@ -33,29 +33,60 @@ function renderDashboard() {
 }
 
 function openStudyMode(topicId) {
-    const topic = studyData[currentCategory].find(t => t.id === topicId);
+    // Find the topic in any of the exam categories
+    let topic = null;
+    for (let cat in studyData) {
+        topic = studyData[cat].find(t => t.id === topicId);
+        if (topic) break;
+    }
+
+    if (!topic) return;
+
+    // Switch View
     document.getElementById('dashboard-view').classList.add('hidden');
     document.getElementById('study-view').classList.remove('hidden');
-    
+
     const contentArea = document.getElementById('study-content-area');
     contentArea.innerHTML = `
-        <h1>${topic.title}</h1>
-        <div class="reading-text">${topic.content}</div>
-        <div class="summary-box">
-            <h3>Key Takeaways</h3>
-            <ul>${topic.summary.map(s => `<li>${s}</li>`).join('')}</ul>
+        <div class="study-container">
+            <h1 class="study-title">${topic.title}</h1>
+            <hr>
+            <div class="main-text">
+                ${topic.content}
+            </div>
+            
+            <div class="summary-section">
+                <h3><i class="fas fa-list-check"></i> Key Facts to Remember</h3>
+                <ul>
+                    ${topic.summary.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            </div>
+
+            <div class="quiz-preview">
+                <h3><i class="fas fa-question-circle"></i> Self-Assessment</h3>
+                ${topic.mcqs.map((m, i) => `
+                    <div class="study-mcq">
+                        <p><strong>Q${i+1}:</strong> ${m.q}</p>
+                        <div class="study-options">
+                            ${m.options.map(opt => `<button class="study-opt-btn" onclick="verifyAnswer(this, '${m.a}')">${opt}</button>`).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
         </div>
     `;
+    window.scrollTo(0, 0);
+}
 
-    document.getElementById('mark-read-btn').onclick = () => {
-        if(!completedTopics.includes(topicId)) {
-            completedTopics.push(topicId);
-            localStorage.setItem('completedTopics', JSON.stringify(completedTopics));
-        }
-        showDashboard();
-        renderDashboard();
-        updateOverallProgress();
-    };
+// Helper to check answers inside study mode
+function verifyAnswer(btn, correct) {
+    if(btn.innerText === correct) {
+        btn.style.backgroundColor = "#10b981"; // Success Green
+        btn.style.color = "white";
+    } else {
+        btn.style.backgroundColor = "#ef4444"; // Danger Red
+        btn.style.color = "white";
+    }
 }
 
 function showDashboard() {
