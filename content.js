@@ -36,8 +36,7 @@ const studyData = {
     "Reasoning": [],
     "English": []
 };
-// Add this inside the studyData["General Knowledge"] array
-{
+
     id: "gk_mah_01",
     title: "General Knowledge: Comprehensive Maharashtra",
     content: `
