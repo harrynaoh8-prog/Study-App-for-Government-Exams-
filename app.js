@@ -28,12 +28,12 @@ function renderDashboard() {
     `).join('');
     
     // Update Category Progress Bar
-    const catProgress = (topics.filter(t => completedTopics.includes(t.id)).length / topics.length) * 100 || 0;
+    const catCompleted = topics.filter(t => completedTopics.includes(t.id)).length;
+    const catProgress = (catCompleted / topics.length) * 100 || 0;
     document.getElementById('cat-progress-fill').style.width = catProgress + "%";
 }
 
 function openStudyMode(topicId) {
-    // Find the topic in any of the exam categories
     let topic = null;
     for (let cat in studyData) {
         topic = studyData[cat].find(t => t.id === topicId);
@@ -42,7 +42,6 @@ function openStudyMode(topicId) {
 
     if (!topic) return;
 
-    // Switch View
     document.getElementById('dashboard-view').classList.add('hidden');
     document.getElementById('study-view').classList.remove('hidden');
 
@@ -51,17 +50,11 @@ function openStudyMode(topicId) {
         <div class="study-container">
             <h1 class="study-title">${topic.title}</h1>
             <hr>
-            <div class="main-text">
-                ${topic.content}
-            </div>
-            
+            <div class="main-text">${topic.content}</div>
             <div class="summary-section">
-                <h3><i class="fas fa-list-check"></i> Key Facts to Remember</h3>
-                <ul>
-                    ${topic.summary.map(item => `<li>${item}</li>`).join('')}
-                </ul>
+                <h3><i class="fas fa-list-check"></i> Key Facts</h3>
+                <ul>${topic.summary.map(item => `<li>${item}</li>`).join('')}</ul>
             </div>
-
             <div class="quiz-preview">
                 <h3><i class="fas fa-question-circle"></i> Self-Assessment</h3>
                 ${topic.mcqs.map((m, i) => `
@@ -75,16 +68,47 @@ function openStudyMode(topicId) {
             </div>
         </div>
     `;
+
+    // --- REGULATE MARK AS READ BUTTON ---
+    const markReadBtn = document.getElementById('mark-read-btn');
+    
+    // Check if already completed to style the button initially
+    if (completedTopics.includes(topicId)) {
+        markReadBtn.innerText = "Completed ✅";
+        markReadBtn.style.backgroundColor = "#10b981"; // Success Green
+    } else {
+        markReadBtn.innerText = "Mark as Read & Continue";
+        markReadBtn.style.backgroundColor = "#1e293b"; // Default Navy
+    }
+
+    markReadBtn.onclick = () => {
+        if (!completedTopics.includes(topicId)) {
+            completedTopics.push(topicId);
+            localStorage.setItem('completedTopics', JSON.stringify(completedTopics));
+            
+            // Visual feedback
+            markReadBtn.innerText = "Saving...";
+            setTimeout(() => {
+                markReadBtn.innerText = "Completed ✅";
+                markReadBtn.style.backgroundColor = "#10b981";
+                updateOverallProgress(); 
+                renderDashboard();
+            }, 500);
+        } else {
+            // If already read, just go back
+            showDashboard();
+        }
+    };
+
     window.scrollTo(0, 0);
 }
 
-// Helper to check answers inside study mode
 function verifyAnswer(btn, correct) {
     if(btn.innerText === correct) {
-        btn.style.backgroundColor = "#10b981"; // Success Green
+        btn.style.backgroundColor = "#10b981";
         btn.style.color = "white";
     } else {
-        btn.style.backgroundColor = "#ef4444"; // Danger Red
+        btn.style.backgroundColor = "#ef4444";
         btn.style.color = "white";
     }
 }
@@ -95,12 +119,19 @@ function showDashboard() {
 }
 
 function updateOverallProgress() {
-    // Basic logic for top bar progress
-    const totalTopics = 15; // Assume 15 for GK
+    // Count total topics across all categories in studyData
+    let total = 0;
+    for (let cat in studyData) {
+        total += studyData[cat].length;
+    }
+    
     const completedCount = completedTopics.length;
-    const percent = Math.round((completedCount / totalTopics) * 100);
-    document.getElementById('overall-progress-text').innerText = `${percent}% Completed`;
+    const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+    
+    const progressText = document.getElementById('overall-progress-text');
+    if (progressText) {
+        progressText.innerText = `${percent}% Completed`;
+    }
 }
 
 init();
-
